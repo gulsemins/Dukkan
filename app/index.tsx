@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, FlatList, ActivityIndicator } from "react-native";
+import { View, FlatList } from "react-native";
 import axios from "axios";
 
 import { Link } from "expo-router";
@@ -13,7 +13,7 @@ type RenderItemType = {
 };
 const Products = () => {
   const { loading, error, productList } = useFetch(
-    process.env.EXPO_PUBLIC_API_URL! + "asd"
+    process.env.EXPO_PUBLIC_API_URL!
   );
 
   const renderProductList = ({ item }: RenderItemType) => (

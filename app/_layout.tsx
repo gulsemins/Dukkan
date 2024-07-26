@@ -17,8 +17,8 @@ export default function Layout() {
         },
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Ürünler" }} />
-      <Stack.Screen name="Details" />
+      <Stack.Screen name="index" options={{ title: "Product" }} />
+      <Stack.Screen name="Details" options={{ title: "Product Details" }} />
     </Stack>
   );
 }
