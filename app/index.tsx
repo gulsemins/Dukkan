@@ -4,39 +4,26 @@ import axios from "axios";
 
 import { Link } from "expo-router";
 import ProductCard from "@/components/ProductCard/ProductCard";
+import useFetch from "@/hooks/useFetch/useFetch";
+
+import Error from "@/components/Error/Error";
+import Loading from "@/components/Loading/Loading";
 type RenderItemType = {
   item: ProductType;
 };
 const Products = () => {
-  console.log(process.env.EXPO_PUBLIC_API_URL);
+  const { loading, error, productList } = useFetch(
+    process.env.EXPO_PUBLIC_API_URL! + "asd"
+  );
 
-  const [error, setError] = useState(null);
-  const [productList, setProductList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
-    try {
-      const response = await axios.get(process.env.EXPO_PUBLIC_API_URL!);
-      console.log(response.data);
-
-      setProductList(response.data);
-      setLoading(false);
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
-    }
-  }
   const renderProductList = ({ item }: RenderItemType) => (
     <ProductCard product={item} />
   );
   if (loading) {
-    return <ActivityIndicator size={"large"} />;
+    return <Loading />;
   }
   if (error) {
-    return <Text>{error}</Text>;
+    return <Error />;
   }
   return (
     <View>
