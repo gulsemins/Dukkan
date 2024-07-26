@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, Button, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, Button, FlatList, ActivityIndicator } from "react-native";
 import axios from "axios";
 
 import { Link } from "expo-router";
@@ -10,23 +10,38 @@ type RenderItemType = {
 const Products = () => {
   console.log(process.env.EXPO_PUBLIC_API_URL);
 
+  const [error, setError] = useState(null);
   const [productList, setProductList] = useState([]);
-  async function fetchData() {
-    const response = await axios.get(process.env.EXPO_PUBLIC_API_URL!);
-    console.log(response.data);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    setProductList(response.data);
+  async function fetchData() {
+    try {
+      const response = await axios.get(process.env.EXPO_PUBLIC_API_URL!);
+      console.log(response.data);
+
+      setProductList(response.data);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
   }
   const renderProductList = ({ item }: RenderItemType) => (
     <ProductCard product={item} />
   );
+  if (loading) {
+    return <ActivityIndicator size={"large"} />;
+  }
+  if (error) {
+    return <Text>{error}</Text>;
+  }
   return (
     <View>
-      <Text>home page</Text>
       <Link href={"/Details"}>go to details</Link>
       <FlatList data={productList} renderItem={renderProductList} />
-
-      <Button title="fetch" onPress={fetchData} />
     </View>
   );
 };

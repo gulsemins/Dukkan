@@ -9,14 +9,15 @@ export default function Layout() {
     <Stack
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#f4511e",
+          backgroundColor: "#eeeeee",
         },
-        headerTintColor: "#fff",
+        headerTintColor: "black",
         headerTitleStyle: {
           fontWeight: "bold",
         },
       }}
     >
+      <Stack.Screen name="index" options={{ title: "Ürünler" }} />
       <Stack.Screen name="Details" />
     </Stack>
   );
