@@ -9,7 +9,7 @@ export default function Layout() {
     <Stack
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#eeeeee",
+          backgroundColor: "#64b5f6",
         },
         headerTintColor: "black",
         headerTitleStyle: {
@@ -18,7 +18,10 @@ export default function Layout() {
       }}
     >
       <Stack.Screen name="index" options={{ title: "Product" }} />
-      <Stack.Screen name="Details" options={{ title: "Product Details" }} />
+      <Stack.Screen
+        name="details/[id]"
+        options={{ title: "Product Details" }}
+      />
     </Stack>
   );
 }

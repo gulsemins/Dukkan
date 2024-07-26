@@ -1,6 +1,7 @@
 import { ProductType } from "@/app";
+import { router } from "expo-router";
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 
 type Props = {
   product: ProductType;
@@ -8,13 +9,22 @@ type Props = {
 
 const ProductCard = (props: Props) => {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: props.product.image }} />
-      <View style={styles.body_container}>
-        <Text style={styles.title}>{props.product.title}</Text>
-        <Text style={styles.price}>{props.product.price}</Text>
+    <Pressable
+      onPress={() => {
+        router.push({
+          pathname: "/details/[id]",
+          params: { id: props.product.id },
+        });
+      }}
+    >
+      <View style={styles.container}>
+        <Image style={styles.image} source={{ uri: props.product.image }} />
+        <View style={styles.body_container}>
+          <Text style={styles.title}>{props.product.title}</Text>
+          <Text style={styles.price}>{props.product.price}</Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 export default ProductCard;

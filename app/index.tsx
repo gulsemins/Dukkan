@@ -27,7 +27,6 @@ const Products = () => {
   }
   return (
     <View>
-      <Link href={"/Details"}>go to details</Link>
       <FlatList data={productList} renderItem={renderProductList} />
     </View>
   );

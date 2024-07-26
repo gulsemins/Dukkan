@@ -3,7 +3,7 @@ import axios from "axios";
 
 function useFetch(url: string) {
   const [error, setError] = useState(null);
-  const [productList, setProductList] = useState([]);
+  const [productList, setProductList] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
   async function fetchData() {
